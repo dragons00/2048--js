@@ -4,6 +4,18 @@ const arr=[];
 const itemArr=document.getElementsByClassName('cell-item');
 //容器元素
 const containerEl=document.getElementsByClassName('container')[0]
+//手机端touch事件的各种位置点
+//触摸起始点
+var startX=0;
+var startY=0;
+//touch终点
+var endX=0;
+var endY=0;
+//计算移动距离
+var angleX=0;
+var angleY=0;
+//存储touch移动方向
+var direction='';
 //PC端的键盘上下左右触发事件
 document.addEventListener('keydown',keyboardHander,false
  )
@@ -25,7 +37,43 @@ function keyboardHander(e){
   }
  }
 //移动端touch触发
-//containerEl.addEventListener();
+containerEl.addEventListener('touchstart',touchStart);
+containerEl.addEventListener('touchend',touchEnd);
+function touchStart(e){
+  e.preventDefault();
+  startX=Math.round(e.changedTouches[0].pageX);
+  startY=Math.round(e.changedTouches[0].pageY);
+}
+function touchEnd(e){
+  e.preventDefault();
+  endX=Math.round(e.changedTouches[0].pageX);
+  endY=Math.round(e.changedTouches[0].pageY);;
+  angleX=endX-startX;
+  angleY=endY-startY;
+  if(Math.abs(angleX)>Math.abs(angleY)){
+    if(angleX>0){
+      direction='right';
+    }else{direction='left';}
+  }else{if(angleY>0){
+    direction='down';
+  }else{direction='up';}}
+  angleCal();
+}
+function angleCal(){
+switch(this.direction){
+  case 'up':
+    upHander();
+    break;
+  case 'down':
+    downHander();
+    break;
+  case 'left':
+    leftHander();
+    break;
+  case 'right':
+    rightHander();
+    break;
+  }}
 //重置清空arr[]
 function resetArr(){
  for(var i=0;i<4;i++){
