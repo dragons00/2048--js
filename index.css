@@ -1,0 +1,21 @@
+.container{
+ display:grid;
+ width:500px;
+ height:500px;
+ padding:10px;
+ background:#C0C0C0;
+ grid-template-columns: repeat(4,100px);
+ grid-template-rows: repeat(4,100px);
+ justify-content:space-between;
+ align-content: space-between;
+}
+.cell-item{
+ width:100px;
+ height:100px;
+ background: #DDDDDD;
+ text-align: center;
+ vertical-align: middle;
+ align-self: center;
+ justify-self:center;
+ font-size :5em;
+}
